@@ -1,0 +1,144 @@
+body {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    text-align: center;
+	letter-spacing: 1px;
+	/*color: #3d4970;*/
+  background-color: #0099FF;
+}
+
+.container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  margin-right: 5%;
+  width: 100%;
+}
+
+.start_button {
+  position: relative;
+}
+
+#logo{
+  border: #fff solid 3px;
+  /*position: fixed;*/
+  /*?margin-right: 150px;*/
+}
+
+.instructions {
+position: absolute;
+top: 20%;
+width: 600px;
+height: 300px;
+background: white;
+text-align: center;
+border: solid gray 2px;
+padding: 30px;
+left: 20%;
+}
+
+
+
+#info {
+  font-size: 54px;
+  font-weight: 300;
+  /*color: #fff;*/
+  color: #0050ef;
+}
+
+
+
+h2 {
+  color: #0050ef;
+}
+
+
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background: #AA076B;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: 1000;
+  display: none;
+}
+
+
+ul li {
+	display: inline;
+  padding: 25px;
+}
+
+nav ul li:first-child {
+	float: left;
+
+}
+
+nav ul li:last-child {
+	float: right;
+}
+
+nav a {
+	/*color: #0050ef;*/
+  color: #AA076B;
+}
+
+.img {
+	margin: 2px 0 0 0;
+}
+
+#grid_container {
+  width: 600px;
+  height: 800px;
+  margin-top: auto;
+  clear: both;
+}
+
+.box {
+  height: 90px;
+  width: 90px;
+}
+
+.score_container {
+  border:  3px solid #fff;
+  height: 150px;
+  width: 150px;
+  /*margin: auto;*/
+  float: right;
+  padding-left: 20px;
+}
+
+.score_container2 {
+  border:  3px solid #fff;
+  height: 150px;
+  width: 150px;
+  /*margin: auto;*/
+  float: left;
+  display: none;
+}
+
+/*#level_number {
+  font-size: 54px;
+  color: #0050ef;
+}*/
+
+#clock {
+  font-size: 54px;
+  color: #0050ef;
+}
+
+#timesup {
+  position: relative;
+  /*float:left;*/
+  padding: 155px;
+  padding-left: 155px;
+  padding-bottom: 155px;
+  width: 700px;
+}
+
+/*.score_container2 {
+  display: none;
+}*/
