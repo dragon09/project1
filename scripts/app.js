@@ -13,8 +13,6 @@ $(document).ready(function () {
   }
 
 
-
-
   //sound should be connected to after Start button is clicked
   // function  soundIntro(soundFile) {
   //   var music = new Music(soundFile);
@@ -25,6 +23,8 @@ $(document).ready(function () {
   var startNewGame = $(".new")
   var howToPlay = $(".howTo")
 
+
+  // start.NewGame.click(newGame)
   howToPlay.click(newHowTo)
 
 
@@ -40,7 +40,6 @@ $(document).ready(function () {
 
   //function called after the "Start Game" button is clicked
   $("#start_button").click(startGame);
-
   $('.title').hide();
   $('.grid_container').hide();
   $('.score_container').hide();
@@ -102,6 +101,8 @@ $(document).ready(function () {
   })
 
 
+
+
   //How To Play link-upper left corner
   $(".ready").click(function(){
       $(".overlay").fadeIn(1000);
@@ -117,7 +118,16 @@ $(document).ready(function () {
       console.log('how to is working');
   }
 
+//NEW gameover MODAL
+function gameOver(){
+    $('#gameover-modal').fadeIn(1000);
 
+    }
+    $('span').css('visibility','hidden');
+    clearInterval(timer);
+// }
+
+//END of NEW game over modal
 
 
   //append images to the DOM onclick bubble function
@@ -145,12 +155,6 @@ $(document).ready(function () {
 
   // $(‘.box’).length
   // var numberOfImages = $(‘.box’).length;
-
-
-
-
-
-
 
 
 
@@ -210,7 +214,7 @@ $(document).ready(function () {
 
 
 
-  startNewGame.click(newGame);
+  // startNewGame.click(newGame);
 
   function newGame() {
     console.log('THIS IS A NEW GAME CLICK')
@@ -233,7 +237,6 @@ $(document).ready(function () {
       $('.images_container').append('<img class="box" src="'+firstImage+'" />');
       console.log('appendImages working');
 
-      // 'img/unicorn.png' && 'img/Small_pegasus.gif' && 'img/babyuni.gif'
 
       if( firstImage == 'img/unicorn.png' || firstImage == 'img/Small_pegasus.gif' || firstImage == 'img/babyuni.gif'){
         winning++;
@@ -250,8 +253,10 @@ $(document).ready(function () {
         if(losing>2){
           alert('Sorry!  Having a bad day?  You collected 3 different skulls...Nobody wins this way!');
           audio2.play();
-          $('#gameover').show();
-          return;
+          // $('#gameover').show();
+          $('#gameover-modal').fadeIn(300)
+            $('#gameover-modal').fadeOut(3000)
+          // return;
         }
 
       }

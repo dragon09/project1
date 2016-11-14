@@ -50,23 +50,33 @@
             <div>
                 <p>You have 25 seconds to click and pop as many bubbles as possible. </p>
                 <ul>
-                    <li>1. Behind each bubble is special suprise!</li>
-                    <li>2. Be careful not to click a bad bubble or your it's Game Over for you.</li>
-                    <li>3. Score as many points as possible.</li>
+                    <li><p>1. Behind each bubble is special suprise!</p></li>
+                    <li><p>2. Be careful not to click a bad bubble or your it's Game Over for you.</p></li>
+                    <li><p>3. Score as many points as possible.</p></li>
                 </ul>
-                <p>So, Are you ready?</p>
+                <p>So, are you ready?</p>
                 <a class="close" href="#">Got It!</a>
             </div>
         </div>
     </div>
+
+    <div id="gameover-modal">
+                        <img src="img/skull.gif"/>
+                        <img src="img/gameOver2.png" />
+                        <img src="img/skull.gif"/>
+                    </div>
+
+
 <!-- game over image notification -->
-    <div id="gameover" style="display:none">
+    <!-- <div id="gameover" style="display:none">
       <img src="img/gameOver.png" /><br>
+      <input id='buttons' type="button" value="Try again!" onClick="window.location.reload()"> -->
       <!-- You have scored: <span id="scoreCount">0</span> -->
-    </div>
+    <!-- </div> -->
     <div id="skull">
     <img src="img/skull.gif" style="display:none" alt="" />
     </div>
+
     <!-- time/s up image -->
     <img id="timesup" src="img/timesup.png" style="display:none" />
     <!-- $('#timer').show(); -->
