@@ -35,7 +35,7 @@ $(document).ready(function () {
 
   //starts a new game
   $(".new").click(function () {
-    console.log('new yo')
+    startGame();
   });
 
   //function called after the "Start Game" button is clicked
@@ -46,61 +46,63 @@ $(document).ready(function () {
   $('.container2').hide();
 
 
+  var timerInterval = null;
 
   //this function not working
   function startGame() {
+    $('body').css('background', "initial");
     console.log('start button clicked')
     $('.instructions').hide();
     $('.title').show();
     $('.grid_container').show();
     $('.score_container').show();
     $('#timer').show();
+    $(".images_container").empty();
+    $("#timesup, #winner-modal, #gameover-modal").hide();
+    count = 25;
+    winning = 0;
+    losing = 0;
+    gameWasEnded = false;
+    info.resetScore();
+    clearInterval(timerInterval);
+    timer();
+    var $bubbles = [];
+    for (var i = 0; i <= 40; i++) {
+      $bubbles.push($("<img>", {
+        "class": "box",
+        id: i,
+        src: "img/bubble.png"
+      }));
+    }
+    $('.grid_container').empty().append($bubbles);
+
     // soundIntro('sound/Loading_Loop.wav');
   }
 
 
   //for timer
   var timerElement = $('#clock');
-  var count = 25;
+  var count;
 
   var isTimerStarted = false;
   //var counter = setInterval(timer, 1000);
 
+  function updateTimerUI () {
+    $("#clock").text(count);
+  }
     //countdown timer working
   function timer(){
     $('.score_container2').show();
-    isTimerStarted = true;
-   	count--;
-    $("#clock").text(count);
-
-   	if (count <= 0)	{
-      // stop interval
-      //clearInterval(counter);
-
-      // time's up!
-      // append the image
-      //$('#clock').append('<img id="timesup" src="img/timesup.png" />')
-      $('#timesup').show();
-      // $('#zerotime').play();
-
-      // remove the image after 5 seconds
-      setTimeout(function(){
-        $('#timesup').fadeOut();
-      }, 5000)
-
-      isTimerStarted = false;
-      return;
-   	}
-    setTimeout(timer, 1000);
-  };
-
-  $('#start_button').click(function(){
-    if(!isTimerStarted){
-      timer();
-    }
-  })
-
-
+    updateTimerUI();
+    timerInterval = setInterval(function () {
+      count--;
+      updateTimerUI();
+      if (count <= 0)	{
+       gameEnded(null);
+       return;
+      }
+    }, 1000)
+  }
 
 
   //How To Play link-upper left corner
@@ -121,14 +123,19 @@ $(document).ready(function () {
 //NEW gameover MODAL
 function gameOver(){
     $('#gameover-modal').fadeIn(1000);
-
     }
-    $('span').css('visibility','hidden');
-    clearInterval(timer);
-// }
 
-//END of NEW game over modal
 
+//NEW winner MODAL
+function winner() {
+  $('#winner-modal').fadeIn(1500);
+}
+$('span').hide();
+
+
+function winner_alert() {
+  $('#winner-alert').toggle(1000);
+}
 
   //append images to the DOM onclick bubble function
   var appendImages = ['img/vic.png', 'img/broccoli.gif', 'img/butterfly.gif',
@@ -170,99 +177,76 @@ function gameOver(){
     removeScore: function(num){
       this.scoreCounter -= num;
       collect10();
+    },
+    resetScore: function () {
+      this.scoreCounter = 0;
+      collect10();
     }
   };
 
 
-  //add one level
-  // var level = {
-  //   compareLevel: 1,
-  //   levelUp: function(num) {
-  //     this.compareLevel += num;
-  //     $('#level_number').text(this.level_number);
-  //     collect10();
-  //     return;
-  //   }
-  // };
-
   //if/else logic for level up
   function collect10() {
-    // if (level.compareLevel < 2 && info.scoreCounter >= 11) {
-    //   console.log('got 12')
-    //   level.levelUp(1);
-    //   $('.level').show();
-    //   $('sound/Ta Da-SoundBible.com-1884170640.wav').play();
-    //   setTimeout(function(){
-    //     $('.level').fadeOut();
-    //   }, 5000);
-    // }
-    // else if (level.compareLevel < 12 && info.scoreCounter >= 21) {
-    //   level.levelUp(1);
-    //   $('.level').show();
-    // }
-    // else if (level.compareLevel < 22 && info.scoreCounter >= 41) {
-    //   level.levelUp(1);
-    //   $('.level').show();
-    // }
-    // else {
-    //   console.log('this is working');
-    // }
-
     $('#info').text(info.scoreCounter);
   }
   collect10();
 
-
-
-  // startNewGame.click(newGame);
-
-  function newGame() {
-    console.log('THIS IS A NEW GAME CLICK')
-    $('.box').each(function() {
-      $(this).click(function() {
-        // document.getElementById("./sound/Loading_Loop.wav").play();
-        // howMany += 10;
-        // $("#info").text(howMany);
-        $(this).remove();
-      });
-    });
-  }
-
   var winning = 0;
   var losing = 0;
+  var gameWasEnded = false;
+
+  // window.endGame = gameEnded;
+  function gameEnded (won) {
+    clearInterval(timerInterval);
+    gameWasEnded = true;
+    if (won) {
+      new PNotify({
+        type: "success",
+        title: 'Congrats!!!',
+        icon: false,
+        text: 'Having a bad day?  Be happy! You won! :D',
+        delay: 1000
+      });
+      // You won!
+      // new PNotify('Its magical!  You collected 2 unicorns AND a pegasus!  Nothing can top that! You win!!!')
+      $('#winner-alert').fadeIn(1500);
+      $('#winner-alert').fadeOut(1500);
+      $("#scoreCount").text("$" + info.scoreCounter).show();
+      document.getElementById("win").play();
+      // $('#winner').show();
+      // return;
+      $('#winner-modal').fadeIn(1000)
+      $('#winner-modal').fadeOut(8000)
+    } else if (won === false){
+      new PNotify({
+        type: "error",
+        title: 'Sorry!',
+        icon: false,
+        text: 'Having a bad day?  You collected 3 different skulls...Nobody wins this way!',
+        delay: 1000
+      });
+      audio2.play();
+      // $('#gameover').show();
+      $('#gameover-modal').fadeIn(3500)
+      $('#gameover-modal').fadeOut(3000)
+      // return;
+    } else {
+      $('#timesup').show();
+      setTimeout(function(){
+        $('#timesup').fadeOut();
+      }, 5000);
+    }
+  }
 
   function appendImage(){
+
     var firstImage = appendImages.pop();
     if(firstImage){
       $('.images_container').append('<img class="box" src="'+firstImage+'" />');
       console.log('appendImages working');
 
-
-      if( firstImage == 'img/unicorn.png' || firstImage == 'img/Small_pegasus.gif' || firstImage == 'img/babyuni.gif'){
-        winning++;
-        if(winning>2){
-          // You won!
-          alert('Its magical!  You collected 2 unicorns AND a pegasus!  Nothing can top that! You win!!!')
-          document.getElementById("win").play();
-          $('#winner').show();
-          return;
-        }
-      }
-      if( firstImage == 'img/changer.gif' || firstImage == 'img/skull.gif' ||  firstImage == 'img/skull2.gif') {
-        losing++;
-        if(losing>2){
-          alert('Sorry!  Having a bad day?  You collected 3 different skulls...Nobody wins this way!');
-          audio2.play();
-          // $('#gameover').show();
-          $('#gameover-modal').fadeIn(300)
-            $('#gameover-modal').fadeOut(3000)
-          // return;
-        }
-
-      }
-
       if(firstImage=='img/unicorn.png'){
-        alert('You found a special unicorn and earned 3 More Images! + 200 points!')
+         new PNotify('You found a special unicorn and earned 3 More Images! + 200 points!')
         audio3.play();
         $('#coin').show();
         appendImage();
@@ -271,14 +255,14 @@ function gameOver(){
         info.addScore(200);
 
       } else if (firstImage =='img/skull.gif') {
-        alert('Sorry! You clicked on the scary skull and lose -100 points and 5 of your images.')
+        new PNotify('Sorry! You clicked on the scary skull and lose -100 points and 5 of your images.')
         audio3.play();
         $('#skull').show();
         $('.images_container img').slice(0, 5).remove();
         info.removeScore(100);
 
       } else if (firstImage =='img/vic.png') {
-        alert('You found my baby picture!  Collect ++200 points and 2 More images!')
+        new PNotify('You found my baby picture!  Collect ++200 points and 2 More images!')
         audio3.play();
         $('#coin').show();
         appendImage();
@@ -289,34 +273,53 @@ function gameOver(){
         // audio3.play();
       }
 
+            if( firstImage == 'img/unicorn.png' || firstImage == 'img/Small_pegasus.gif' || firstImage == 'img/babyuni.gif'){
+          // if (true) {
+              winning++;
+              if(winning>2){
+                gameEnded(true);
+              }
+            }
+            if( firstImage == 'img/changer.gif' || firstImage == 'img/skull.gif' ||  firstImage == 'img/skull2.gif') {
+            // if (true) {
+              losing++;
+              if(losing>2){
+                gameEnded(false);
+              }
+
+            }
+
 
     }
       // else if (firstImage=='img/unicorn.png' && 'img/Small_pegasus.gif' && 'img/babyuni.gif') {
-      //   alert('It/s magical!  You collected 2 unicorns AND a pegasus!  Nothing can top that! You win!!!')
+      //   new PNotify('It/s magical!  You collected 2 unicorns AND a pegasus!  Nothing can top that! You win!!!')
       //   $('#winner').show();
       // } else {
       //   info.addScore(10);
       // }
         // });
-    }
-  // }
+    //}
+   }
 
 
   //higher level function for onClick image to sound pop, remove and add points
-  $('.box').each(function() {
-    $(this).click(function() {
+  $(".grid_container").on("click", ".box", function() {
+    if (gameWasEnded) {
+      return;
+    }
       $('body').css('background', randomColor());
+
       playSound('sound/PopBanner-SoundBible.com-641783855.wav');
       // howMany += 10;
       // $("#info").text(howMany);
       // (this).append(appendImages);
-      $(this).remove();
+      $(this).addClass((Math.random () > 0.5 ? "fadeOutUp": "zoomOutUp") + " animated").css({
+        "pointer-events": "none"
+      });
       console.log('i am removed')
 
       appendImage()
       //appendImages
-
-    });
   });
 
 

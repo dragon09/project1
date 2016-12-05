@@ -60,11 +60,15 @@
         </div>
     </div>
 
+  <div id="winner-alert">
+    <h1>Its magical!  You collected 2 unicorns AND a pegasus!  Nothing can top that! You win!!!</h1>
+  </div>
+
     <div id="gameover-modal">
                         <img src="img/skull.gif"/>
                         <img src="img/gameOver2.png" />
                         <img src="img/skull.gif"/>
-                    </div>
+    </div>
 
 
 <!-- game over image notification -->
@@ -73,6 +77,7 @@
       <input id='buttons' type="button" value="Try again!" onClick="window.location.reload()"> -->
       <!-- You have scored: <span id="scoreCount">0</span> -->
     <!-- </div> -->
+
     <div id="skull">
     <img src="img/skull.gif" style="display:none" alt="" />
     </div>
@@ -81,13 +86,23 @@
     <img id="timesup" src="img/timesup.png" style="display:none" />
     <!-- $('#timer').show(); -->
 
-    <div id="winner" style="display:none">
+    <!-- <div id="winner" style="display:none">
           <img src="img/zoom.png" alt="" />
           <img src="img/winner.png" /><br>
           <img src="img/pup.gif" alt="" />
           <img src="img/winner.png" /><br>
           <img src="img/thwack.png" alt="" />
           <img src="img/winner.png" /><br>
+          <img src="img/horse.gif" alt="" />
+          You won: <span id="scoreCount">$1,000,000.00</span>
+    </div> -->
+
+    <div id="winner-modal">
+          <img src="img/zoom.png" alt="" />
+          <img src="img/winner.png" /><br>
+          <img src="img/pup.gif" alt="" />
+          <img src="img/winner.png" /><br>
+          <img src="img/thwack.png" alt="" />
           <img src="img/horse.gif" alt="" />
           You won: <span id="scoreCount">$1,000,000.00</span>
     </div>
@@ -130,47 +145,7 @@
       <br>
 
         <div class="grid_container">
-          <img class="box" id="0" src="img/bubble.png"/>
-          <img class="box" id="1" src="img/bubble.png">
-          <img class="box" id="2" src="img/bubble.png">
-          <img class="box" id="3" src="img/bubble.png">
-          <img class="box" id="4" src="img/bubble.png">
-          <img class="box" id="5" src="img/bubble.png">
-          <img class="box" id="6" src="img/bubble.png">
-          <img class="box" id="7" src="img/bubble.png">
-          <img class="box" id="8" src="img/bubble.png">
-          <img class="box" id="9" src="img/bubble.png">
-          <img class="box" id="10" src="img/bubble.png">
-          <img class="box" id="11" src="img/bubble.png">
-          <img class="box" id="12" src="img/bubble.png">
-          <img class="box" id="13" src="img/bubble.png">
-          <img class="box" id="14" src="img/bubble.png">
-          <img class="box" id="15" src="img/bubble.png">
-          <img class="box" id="16" src="img/bubble.png">
-          <img class="box" id="17" src="img/bubble.png">
-          <img class="box" id="18" src="img/bubble.png">
-          <img class="box" id="19" src="img/bubble.png">
-          <img class="box" id="20" src="img/bubble.png">
-          <img class="box" id="21" src="img/bubble.png">
-          <img class="box" id="22" src="img/bubble.png">
-          <img class="box" id="23" src="img/bubble.png">
-          <img class="box" id="24" src="img/bubble.png">
-          <img class="box" id="25" src="img/bubble.png">
-          <img class="box" id="26" src="img/bubble.png">
-          <img class="box" id="27" src="img/bubble.png">
-          <img class="box" id="28" src="img/bubble.png">
-          <img class="box" id="29" src="img/bubble.png">
-          <img class="box" id="30" src="img/bubble.png">
-          <img class="box" id="31" src="img/bubble.png">
-          <img class="box" id="32" src="img/bubble.png">
-          <img class="box" id="33" src="img/bubble.png">
-          <img class="box" id="34" src="img/bubble.png">
-          <img class="box" id="35" src="img/bubble.png">
-          <img class="box" id="36" src="img/bubble.png">
-          <img class="box" id="37" src="img/bubble.png">
-          <img class="box" id="38" src="img/bubble.png">
-          <img class="box" id="39" src="img/bubble.png">
-          <img class="box" id="40" src="img/bubble.png">
+
         </div>
         <br>
         <br>
@@ -188,10 +163,13 @@
         <source src="sound/Loading_Loop.wav">
 
   </source>
-        <audio autoplay="true" controls="controls" src="sound/Loading_Loop.wav" hidden="hidden" type="audio/wav" controls></audio>
+        <!-- <audio autoplay="true" controls="controls" src="sound/Loading_Loop.wav" hidden="hidden" type="audio/wav" controls></audio> -->
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.0.0/pnotify.min.js">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        </script>
+
         <script src="scripts/app.js"></script>
 
 </body>
