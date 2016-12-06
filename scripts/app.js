@@ -204,7 +204,7 @@ function winner_alert() {
         type: "success",
         title: 'Congrats!!!',
         icon: false,
-        text: 'Having a bad day?  Be happy! You won! :D',
+        text: 'Its magical! You collected 2 unicorns AND a pegasus! Nothing can top that! You WIN!!!',
         delay: 1000
       });
       // You won!
@@ -232,6 +232,7 @@ function winner_alert() {
       // return;
     } else {
       $('#timesup').show();
+      audio4.play();
       setTimeout(function(){
         $('#timesup').fadeOut();
       }, 5000);

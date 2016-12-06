@@ -137,7 +137,7 @@ nav a {
 }
 
 .score_container {
-  border:  3px solid #fff;
+  border:  3px solid #0050ef;
   height: 150px;
   width: 150px;
   /*margin: auto;*/
@@ -146,7 +146,7 @@ nav a {
 }
 
 .score_container2 {
-  border:  3px solid #fff;
+  border:  3px solid #0050ef;
   height: 150px;
   width: 150px;
   /*margin: auto;*/
@@ -213,7 +213,12 @@ nav a {
     left: 15%;
 }
 
-
-/*.score_container2 {
-  display: none;
-}*/
+.footer-copyright {
+  position: relative;
+  background-color: #8A082B;
+  text-align: center;
+  height: 40px;
+  color: #fff;
+  margin-bottom: 15px;
+  clear: both;
+}
